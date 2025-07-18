@@ -4,34 +4,34 @@ import Input from "../components/Input";
 import { axiosInstance } from "../config/axiosInstance";
 import { jwtDecode } from "jwt-decode";
 
-export default function Login() {
+export default function Register() {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         // console.log("Form Data:", data);
 
         try {
-            const response = await axiosInstance.post('/login', data);
+            const response = await axiosInstance.post('/register', data);
             console.log("post data:", data);
 
             // ✅ Get token from response
-            const token = response.data.token;
-            localStorage.setItem("token", token);
+            // const token = response.data.token;
+            // localStorage.setItem("token", token);
 
-            //decoding this token is mein role hoga.
-            const decodedToken = jwtDecode(token);
-            console.log(decodedToken)
+            // //decoding this token is mein role hoga.
+            // const decodedToken = jwtDecode(token);
+            // console.log(decodedToken)
 
-            if (decodedToken.role === "admin") {
-                navigate("/dashboard")
-            } else {
-                navigate("/properties");
-            }
+            // if (decodedToken.role === "admin") {
+            //     navigate("/dashboard")
+            // } else {
+            //     navigate("/properties");
+            // }
 
         } catch (error) {
             console.log(error)
@@ -51,7 +51,7 @@ export default function Login() {
 
             <div className="relative z-10 w-full max-w-md p-6 bg-white/50 rounded-2xl shadow-xl backdrop-blur-md">
                 <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
-                    Login to DreamHome
+                    Register to DreamHome
                 </h2>
 
                 <form className="space-y-5 p-8" onSubmit={handleSubmit(onSubmit)}>
@@ -96,18 +96,31 @@ export default function Login() {
                         )}
                     </div>
 
+<div>
+  <Input
+  type="text"
+  placeholder="Full Name"
+  {...register("name", {
+    required: "Name is required",
+    minLength: { value: 2, message: "Name is too short" },
+  })}
+/>
+{errors.name && (
+  <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>
+)}
+</div>
                     <button
                         type="submit"
                         className="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-3 rounded-lg font-semibold mt-2"
                     >
-                        Login
+                        Register Now
                     </button>
                 </form>
 
                 <p className="text-center text-sm text-gray-600 mt-6">
-                    Don&apos;t have an account?{" "}
-                    <Link to="/register" className="text-blue-600 hover:underline">
-                        Register here
+                    Already have an account?{" "}
+                    <Link to="/login" className="text-blue-600 hover:underline">
+                        Login
                     </Link>
                 </p>
             </div>

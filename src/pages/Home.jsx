@@ -18,8 +18,8 @@ export default function Home() {
             <Link to="/login" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-medium transition">
               Login
             </Link>
-            <Link to="/signup" className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium transition">
-              Signup
+            <Link to="/register" className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium transition">
+              Register
             </Link>
             <Link to="/properties" className="bg-white text-gray-900 px-6 py-3 rounded-full font-medium hover:bg-gray-200 transition">
               View Properties

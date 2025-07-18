@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "../pages/Home"
 import Login from "../pages/Login"
-import Signup from "../pages/Signup"
+import Register from "../pages/Register"
 import Properties from "../pages/Properties"
 import Selling from "../pages/Selling"
 import Dashboard from "../pages/Dashboard"
@@ -15,7 +15,7 @@ const Router = () => {
                 <Route path="/properties" element={<Properties />} />
 
                 <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
+                <Route path="/register" element={<Register />} />
 
 
                 <Route element={<ProtectedRoutes />}>
