@@ -41,7 +41,7 @@ export default function Login() {
 
     return (
         <section
-            className="relative flex items-center justify-center min-h-screen bg-cover bg-center"
+            className="relative pt-20 flex items-center justify-center min-h-screen bg-cover bg-center"
             style={{
                 backgroundImage:
                     "url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c)",
@@ -51,11 +51,11 @@ export default function Login() {
 
             <div className="relative z-10 w-full max-w-md p-6 bg-white/50 rounded-2xl shadow-xl backdrop-blur-md">
                 <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
-                    Login to DreamHome
+                    Login
                 </h2>
 
-                <form className="space-y-5 p-8" onSubmit={handleSubmit(onSubmit)}>
-                    <div className="m-5 p-3">
+                <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+                    <div>
                         <label className="block text-gray-700 text-sm font-medium">
                             Email Address
                         </label>

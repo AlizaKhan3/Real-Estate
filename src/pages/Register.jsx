@@ -41,7 +41,7 @@ export default function Register() {
 
     return (
         <section
-            className="relative flex items-center justify-center min-h-screen bg-cover bg-center"
+            className="relative flex items-center justify-center min-h-screen bg-cover bg-center pt-20"
             style={{
                 backgroundImage:
                     "url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c)",
@@ -54,8 +54,25 @@ export default function Register() {
                     Register to DreamHome
                 </h2>
 
-                <form className="space-y-5 p-8" onSubmit={handleSubmit(onSubmit)}>
-                    <div className="m-5 p-3">
+                <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+
+                    <div>
+                        <label className="block text-gray-700 text-sm font-medium">
+                            Full Name
+                        </label>
+                        <Input
+                            type="text"
+                            placeholder="Full Name"
+                            {...register("name", {
+                                required: "Name is required",
+                                minLength: { value: 2, message: "Name is too short" },
+                            })}
+                        />
+                        {errors.name && (
+                            <p className="text-red-600 text-sm">{errors.name.message}</p>
+                        )}
+                    </div>
+                    <div >
                         <label className="block text-gray-700 text-sm font-medium">
                             Email Address
                         </label>
@@ -76,7 +93,7 @@ export default function Register() {
                         )}
                     </div>
 
-                    <div className="space-y-2">
+                    <div>
                         <label className="block text-gray-700 text-sm font-medium">
                             Password
                         </label>
@@ -96,19 +113,6 @@ export default function Register() {
                         )}
                     </div>
 
-<div>
-  <Input
-  type="text"
-  placeholder="Full Name"
-  {...register("name", {
-    required: "Name is required",
-    minLength: { value: 2, message: "Name is too short" },
-  })}
-/>
-{errors.name && (
-  <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>
-)}
-</div>
                     <button
                         type="submit"
                         className="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-3 rounded-lg font-semibold mt-2"

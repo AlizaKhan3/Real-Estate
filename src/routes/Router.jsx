@@ -1,26 +1,35 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom"
 import Home from "../pages/Home"
 import Login from "../pages/Login"
 import Register from "../pages/Register"
 import Properties from "../pages/Properties"
 import Selling from "../pages/Selling"
 import Dashboard from "../pages/Dashboard"
-import ProtectedRoutes from "../pages/ProtectedRoutes"
+import { ProtectedRoutesDashboard, ProtectedRoutesSell } from "../pages/ProtectedRoutes"
+import Navbar from "../components/Navbar"
+import Sidebar from "../components/Sidebar"
 
 const Router = () => {
+    // const navigate = useNavigate()
+
     return (
         <BrowserRouter>
+            <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/properties" element={<Properties />} />
-
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                {/* <Route path="/properties" element={<Properties />} /> */}
 
+                {/* //nested route */}
+                <Route path="/purchase/*" element={<Sidebar />} />
 
-                <Route element={<ProtectedRoutes />}>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/selling" element={<Selling />} />
+                <Route element={<ProtectedRoutesDashboard />}>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                </Route>
+
+                <Route element={<ProtectedRoutesSell />}>
+                    <Route path="/selling" element={<Selling />} />
                 </Route>
             </Routes>
         </BrowserRouter>
