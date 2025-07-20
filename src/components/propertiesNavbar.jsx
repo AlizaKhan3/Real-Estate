@@ -14,7 +14,7 @@ const PropertiesNavbar = ({ filterPriceHandle }) => {
                 </div>
             </div>
 
-            <div className="bg-yellow-300 rounded-4xl p-2 ml-130">
+            <div className="bg-yellow-300 rounded-4xl p-2 lg:ml-130">
                 <p>AK</p>
             </div>
         </div>
