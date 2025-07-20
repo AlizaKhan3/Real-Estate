@@ -4,12 +4,12 @@ import { jwtDecode } from "jwt-decode";
 export const ProtectedRoutesDashboard = () => {
     //data jwt mein store hei toh usey get karo -- dashboard check
     const data = localStorage.getItem("token")
-    console.log(data)
+    // console.log(data)
     const decoded = jwtDecode(data)
-    const token = decoded.token
+    const role = decoded.role
 
     return (
-        token ? <Outlet /> : <Navigate to="/properties" />
+        role === "admin" ? <Outlet /> : <Navigate to="/properties" />
     )
 }
 

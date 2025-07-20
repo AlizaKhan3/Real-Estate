@@ -8,6 +8,7 @@ import Dashboard from "../pages/Dashboard"
 import { ProtectedRoutesDashboard, ProtectedRoutesSell } from "../pages/ProtectedRoutes"
 import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
+import Error from "../pages/Error"
 
 const Router = () => {
     // const navigate = useNavigate()
@@ -20,6 +21,7 @@ const Router = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 {/* <Route path="/properties" element={<Properties />} /> */}
+                   <Route path="*" element={<Error />} />
 
                 {/* //nested route */}
                 <Route path="/purchase/*" element={<Sidebar />} />
