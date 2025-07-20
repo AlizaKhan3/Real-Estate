@@ -7,16 +7,21 @@ const Sidebar = () => {
 
   const Menu = [
     { id: 1, name: "About Us", move: "/" },
-    { id: 2, name: "Properties", move: "/properties" },
+    { id: 2, name: "Purchase", move: "/purchase/properties" },
     { id: 3, name: "Sell", move: "/selling" },
-    { id: 4, name: "Purchase", move: "/purchase/properties" },
+    { id: 4, name: "Contact", move: "/" },
+    {
+      Bedrooms : {
+        quantity: "HELLOJS1",
+      }
+    }
   ];
 
   return (
     <div className="flex h-screen">
       {/* SIDEBAR */}
       <div
-        className={`fixed lg:static overflow-hidden top-0 left-0 h-full w-1/5 bg-blue-200/50 pt-20 transform transition-transform duration-300 z-50
+        className={`fixed w-64 lg:static overflow-hidden top-0 left-0 h-full bg-blue-200/50 pt-20 transform transition-transform duration-300 z-50
         ${sidebar ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
       >
         <ul className="space-y-6">
@@ -26,8 +31,7 @@ const Sidebar = () => {
                 to={link.move}
                 onClick={() => setSidebar(false)} // close sidebar on link click
                 className={({ isActive }) =>
-                  `block px-5 py-2 rounded-3xl border border-blue-700 transition ${
-                    isActive ? "bg-blue-500 text-white" : "bg-white text-blue-700"
+                  `block px-5 w-max py-2 rounded-3xl border border-blue-700 transition ${isActive ? "bg-blue-500 text-white" : "bg-white text-blue-700"
                   }`
                 }
               >
