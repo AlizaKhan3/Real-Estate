@@ -21,17 +21,30 @@ import Input from "./Input"
 // }
 const PostForm = ({ sendDataToDashboard }) => {
     const [formData, setFormData] = useState({})
+
+    //images ka separate object banraha isko formData wale mein include krna hei
     const [images, setImages] = useState({
-        image1 : null,
-        image2 : null,
+        image1: null,
+        image2: null,
         image3: null
     })
+    
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        const finalData = new FormData()
+
+        for (const key in formData) {
+            finalData.append(key, formData[key])
+        }
+        // Add images
+        if (images.image1) finalData.append("images", images.image1);
+        if (images.image2) finalData.append("images", images.image2);
+        if (images.image3) finalData.append("images", images.image3);
         sendDataToDashboard(formData);
         e.target.reset()
     }
-
+console.log(images)
     const handleInput = (key, value) => {
         setFormData({
             ...formData,
@@ -42,24 +55,24 @@ const PostForm = ({ sendDataToDashboard }) => {
     return (
         <div className="container mx-auto max-w-2xl p-3 text-center">
             <p className="text-3xl font-medium">Edit Property Form</p>
-            <form className="p-4 space-y-2" action="" onSubmit={handleSubmit}>
-                <Input required  onChange={(e) => handleInput("title", e.target.value)} type="text" placeholder="Update Title" />
-                <Input  required onChange={(e) => handleInput("slug", e.target.value)} type="text" placeholder="Update Slug" />
-                <Input required  onChange={(e) => handleInput("categoryName", e.target.value)} type="text" placeholder="categoryName" />
-                <Input required  onChange={(e) => handleInput("location", e.target.value)} type="text" placeholder="Location" />
-                <Input required  onChange={(e) => handleInput("amenities", e.target.value)} type="text" placeholder="Amenities" />
-                <Input required  onChange={(e) => handleInput("description", e.target.value)} type="text" placeholder="Update Description" />
-                <Input required  onChange={(e) => handleInput("price", e.target.value)} type="number" placeholder="Update Price" />
+            <form className="p-4 space-y-2" onSubmit={handleSubmit} action="/add" method="post" encType="multipart/form-data">
+                <Input required onChange={(e) => handleInput("title", e.target.value)} type="text" placeholder="Update Title" />
+                <Input required onChange={(e) => handleInput("slug", e.target.value)} type="text" placeholder="Update Slug" />
+                <Input required onChange={(e) => handleInput("categoryName", e.target.value)} type="text" placeholder="categoryName" />
+                <Input required onChange={(e) => handleInput("location", e.target.value)} type="text" placeholder="Location" />
+                <Input required onChange={(e) => handleInput("amenities", e.target.value)} type="text" placeholder="Amenities" />
+                <Input required onChange={(e) => handleInput("description", e.target.value)} type="text" placeholder="Update Description" />
+                <Input required onChange={(e) => handleInput("price", e.target.value)} type="number" placeholder="Update Price" />
                 <div className="flex justify-center items-center">
-                    <Input required   onChange={(e)=> setImages({...images, image1: e.target.files[0] })} type="file" placeholder="image 1" />
-                    
-                    <Input required  onChange={(e) => handleInput("image2", e.target.value)} type="file" placeholder="image 2" />
-                    <Input required  onChange={(e) => handleInput("image3", e.target.value)} type="file" placeholder="image 3" />
+                    <Input required onChange={(e) => setImages({ ...images, image1: e.target.files[0] })} type="file" placeholder="image 1" />
+
+                    <Input required onChange={(e) => handleInput("image2", e.target.files[1])} type="file" placeholder="image 2" />
+                    <Input required onChange={(e) => handleInput("image3", e.target.files[2])} type="file" placeholder="image 3" />
                 </div>
-                 <div className="flex justify-center items-center">
-                    <Input required  onChange={(e) => handleInput("bedrooms", e.target.value)} type="number" placeholder="no. of Bedrooms" />
-                    <Input required  onChange={(e) => handleInput("bathrooms", e.target.value)} type="number" placeholder="no. of Bathrooms" />
-                    <Input required  onChange={(e) => handleInput("Area Square feet", e.target.value)} type="number" placeholder="Sqaure Ft." />
+                <div className="flex justify-center items-center">
+                    <Input required onChange={(e) => handleInput("bedrooms", e.target.value)} type="number" placeholder="no. of Bedrooms" />
+                    <Input required onChange={(e) => handleInput("bathrooms", e.target.value)} type="number" placeholder="no. of Bathrooms" />
+                    <Input required onChange={(e) => handleInput("Area Square feet", e.target.value)} type="number" placeholder="Sqaure Ft." />
                 </div>
                 <select
                     value={formData.status || ""}

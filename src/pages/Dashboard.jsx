@@ -121,9 +121,8 @@ const Dashboard = () => {
       if (response.status === 200) {
         const newData = response.data.data;
         setproperties((prev) => [...prev, newData])
-
        // setproperties(addProperty)
-        setEditForm(false); // hide form
+        setPostForm(false); // hide form
       }
 
     } catch (error) {
