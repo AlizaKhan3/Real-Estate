@@ -1,4 +1,6 @@
 import { Link, NavLink } from "react-router-dom"
+import { IoMenu } from "react-icons/io5";
+
 
 const Navbar = () => {
     const Menu = [
@@ -24,10 +26,16 @@ const Navbar = () => {
         }
 
     ]
-    return ( 
-     <div className="w-full fixed h-14 p-7 top-0 left-0 z-50 bg-white/30 backdrop-blur-md shadow-md flex items-center justify-between">
-            <div>
-              <p className=" text-2xl font-extrabold text-shadow-blue-50 text-black "> REAL ESTATE</p>
+    return (
+        <div className="w-full fixed h-14 p-7 top-0 left-0 z-50 bg-white/30 backdrop-blur-md shadow-md flex items-center justify-between">
+            <div className="flex justify-center items-center">
+                {/* <button
+                    className="px-4 flex justify-center items-center lg:hidden text-2xl text-black"
+                    // onClick={setSidebar}
+                >
+                    <IoMenu/>
+                </button> */}
+                <p className=" text-2xl font-extrabold text-shadow-blue-50 text-black "> REAL ESTATE</p>
             </div>
             <div className="flex">
                 <ul className="flex gap-5">

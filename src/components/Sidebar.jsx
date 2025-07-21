@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { NavLink, Route, Routes } from "react-router-dom";
 import Properties from "../pages/Properties";
+import { IoMenu } from "react-icons/io5";
+
 
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -11,7 +13,7 @@ const Sidebar = () => {
     { id: 3, name: "Sell", move: "/selling" },
     { id: 4, name: "Contact", move: "/" },
     {
-      Bedrooms : {
+      Bedrooms: {
         quantity: "HELLOJS1",
       }
     }
@@ -46,10 +48,10 @@ const Sidebar = () => {
       <div className="w-full overflow-y-auto">
         {/* TOGGLE BUTTON: show only on mobile */}
         <button
-          className="p-4 lg:hidden fixed top-4 left-4 z-50 bg-blue-600 text-white rounded"
-          onClick={() => setSidebar(!sidebar)}
+          className="p-4 fixed top-4 left-5 lg:hidden bg-blue-600 text-white rounded"
+       
         >
-          ☰
+          <IoMenu onClick={() => setSidebar(!sidebar)}/>
         </button>
 
         <div >
