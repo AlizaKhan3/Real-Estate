@@ -21,7 +21,11 @@ import Input from "./Input"
 // }
 const PostForm = ({ sendDataToDashboard }) => {
     const [formData, setFormData] = useState({})
-
+    const [images, setImages] = useState({
+        image1 : null,
+        image2 : null,
+        image3: null
+    })
     const handleSubmit = (e) => {
         e.preventDefault()
         sendDataToDashboard(formData);
@@ -39,19 +43,23 @@ const PostForm = ({ sendDataToDashboard }) => {
         <div className="container mx-auto max-w-2xl p-3 text-center">
             <p className="text-3xl font-medium">Edit Property Form</p>
             <form className="p-4 space-y-2" action="" onSubmit={handleSubmit}>
-                <Input onChange={(e) => handleInput("title", e.target.value)} type="text" placeholder="Update Title" />
-                <Input onChange={(e) => handleInput("slug", e.target.value)} type="text" placeholder="Update Slug" />
-                <Input onChange={(e) => handleInput("categoryName", e.target.value)} type="text" placeholder="categoryName Title" />
-                <Input onChange={(e) => handleInput("location", e.target.value)} type="text" placeholder="Location" />
-                <Input onChange={(e) => handleInput("amenities", e.target.value)} type="text" placeholder="Amenities" />
-                <Input onChange={(e) => handleInput("images", e.target.value)} type="text" placeholder="Images" />
-
-                <Input onChange={(e) => handleInput("description", e.target.value)} type="text" placeholder="Update Description" />
-                <Input onChange={(e) => handleInput("price", e.target.value)} type="number" placeholder="Update Price" />
+                <Input required  onChange={(e) => handleInput("title", e.target.value)} type="text" placeholder="Update Title" />
+                <Input  required onChange={(e) => handleInput("slug", e.target.value)} type="text" placeholder="Update Slug" />
+                <Input required  onChange={(e) => handleInput("categoryName", e.target.value)} type="text" placeholder="categoryName" />
+                <Input required  onChange={(e) => handleInput("location", e.target.value)} type="text" placeholder="Location" />
+                <Input required  onChange={(e) => handleInput("amenities", e.target.value)} type="text" placeholder="Amenities" />
+                <Input required  onChange={(e) => handleInput("description", e.target.value)} type="text" placeholder="Update Description" />
+                <Input required  onChange={(e) => handleInput("price", e.target.value)} type="number" placeholder="Update Price" />
                 <div className="flex justify-center items-center">
-                    <Input onChange={(e) => handleInput("bedrooms", e.target.value)} type="number" placeholder="no. of Bedrooms" />
-                    <Input onChange={(e) => handleInput("bathrooms", e.target.value)} type="number" placeholder="no. of Bathrooms" />
-                    <Input onChange={(e) => handleInput("Area Square feet", e.target.value)} type="number" placeholder="Sqaure Ft." />
+                    <Input required   onChange={(e)=> setImages({...images, image1: e.target.files[0] })} type="file" placeholder="image 1" />
+                    
+                    <Input required  onChange={(e) => handleInput("image2", e.target.value)} type="file" placeholder="image 2" />
+                    <Input required  onChange={(e) => handleInput("image3", e.target.value)} type="file" placeholder="image 3" />
+                </div>
+                 <div className="flex justify-center items-center">
+                    <Input required  onChange={(e) => handleInput("bedrooms", e.target.value)} type="number" placeholder="no. of Bedrooms" />
+                    <Input required  onChange={(e) => handleInput("bathrooms", e.target.value)} type="number" placeholder="no. of Bathrooms" />
+                    <Input required  onChange={(e) => handleInput("Area Square feet", e.target.value)} type="number" placeholder="Sqaure Ft." />
                 </div>
                 <select
                     value={formData.status || ""}
