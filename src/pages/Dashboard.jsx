@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { axiosInstanceProperty } from "../config/axiosInstance"
 import EditForm from "../components/EditForm";
+import PostForm from "../components/PostForm";
 
 const Dashboard = () => {
   const [properties, setproperties] = useState([])
   const [editedFormData, setEditedFormData] = useState({})
   const [editForm, setEditForm] = useState(false)
+
+  const [postForm, setPostForm] = useState(false)
+  const [postedFormData, setPostedFormData] = useState({})
 
   useEffect(() => {
     axiosInstanceProperty.get("/").then((res) => {
@@ -98,10 +102,35 @@ const Dashboard = () => {
     }
   }
 
-
-  const postProperty = () => {
-
+  const handlePostForm = () => {
+    setPostForm(true);
+    // setPostedFormData(property)
   }
+
+
+  const handlePost = async (data) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      console.log(data)
+      const response = await axiosInstanceProperty.post("/add", data, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      if (response.status === 200) {
+        const newData = response.data.data;
+        setproperties((prev) => [...prev, newData])
+
+       // setproperties(addProperty)
+        setEditForm(false); // hide form
+      }
+
+    } catch (error) {
+      console.log("Error in posting data ->", error)
+    }
+  }
+
 
   return (
     <div className="p-8">
@@ -129,6 +158,8 @@ const Dashboard = () => {
                     onClick={() => handleDelete(property.id)}>Delete</button>
                   <button className="bg-green-500 text-white px-2 py-1 rounded"
                     onClick={() => handleEditForm(property)}>Edit</button>
+                  <button className="bg-green-500 text-white px-2 py-1 rounded"
+                    onClick={() => handlePostForm(property)}>Add Property</button>
                   {/* property --> poora object hei property ka. */}
                 </td>
               </tr>
@@ -139,6 +170,11 @@ const Dashboard = () => {
       {
         editForm ?
           <EditForm sendDataToDashboard={handleUpdate} formData={editedFormData} setFormData={setEditedFormData} />
+          : <></>
+      }
+      {
+        postForm ?
+          <PostForm sendDataToDashboard={handlePost}  />
           : <></>
       }
     </div>
