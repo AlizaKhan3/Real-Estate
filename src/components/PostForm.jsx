@@ -1,24 +1,6 @@
 import { useState } from "react";
 import Input from "./Input"
 
-// {
-//   "title": "1500 sqft. Apartment",---
-//   "slug": "luxury-4bhk-sea-view",
-//   "price": 45000000,
-//   "description": "Spacious 5 BHK apartment with modern amenities and breathtaking sea view.",
-//   "categoryName": "Apartment",
-//   "status":"Rent",
-//   "location": "Gulistan e Johar, Karachi",
-//   "bedrooms": 3,
-//   "bathrooms": 3,
-//   "areaSqft": 1200,
-//   "amenities": ["Parking", "Security"],
-//   "images": [
-//     "sea_view_front.jpg",
-//     "living_room.jpg",
-//     "bedroom.jpg"
-//   ]
-// }
 const PostForm = ({ sendDataToDashboard }) => {
     const [formData, setFormData] = useState({})
 
@@ -28,23 +10,29 @@ const PostForm = ({ sendDataToDashboard }) => {
         image2: null,
         image3: null
     })
-    
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
         const finalData = new FormData()
 
+        // Add images in key-value pait
+        if (images.image1) finalData.append("image1", images.image1);
+        if (images.image2) finalData.append("image2", images.image2);
+        if (images.image3) finalData.append("image3", images.image3);
+
         for (const key in formData) {
             finalData.append(key, formData[key])
         }
-        // Add images
-        if (images.image1) finalData.append("images", images.image1);
-        if (images.image2) finalData.append("images", images.image2);
-        if (images.image3) finalData.append("images", images.image3);
-        sendDataToDashboard(formData);
+        sendDataToDashboard(finalData);
+        console.log(images.image1)
+        console.log(images.image2)
+        console.log(images.image3)
+
+        console.log(finalData)
         e.target.reset()
     }
-console.log(images)
+    // console.log(images)
     const handleInput = (key, value) => {
         setFormData({
             ...formData,
@@ -64,10 +52,12 @@ console.log(images)
                 <Input required onChange={(e) => handleInput("description", e.target.value)} type="text" placeholder="Update Description" />
                 <Input required onChange={(e) => handleInput("price", e.target.value)} type="number" placeholder="Update Price" />
                 <div className="flex justify-center items-center">
-                    <Input required onChange={(e) => setImages({ ...images, image1: e.target.files[0] })} type="file" placeholder="image 1" />
+                    <Input required onChange={(e) => setImages({ ...images, image1: e.target.files[0] })} type="file" name="image1" />
 
-                    <Input required onChange={(e) => handleInput("image2", e.target.files[1])} type="file" placeholder="image 2" />
-                    <Input required onChange={(e) => handleInput("image3", e.target.files[2])} type="file" placeholder="image 3" />
+                    <Input onChange={(e) => setImages({ ...images, image1: e.target.files[0] })}
+                        type="file"
+                        name="image2" />
+                    <Input required onChange={(e) => setImages({ ...images, image1: e.target.files[0] })} type="file" name="image3" />
                 </div>
                 <div className="flex justify-center items-center">
                     <Input required onChange={(e) => handleInput("bedrooms", e.target.value)} type="number" placeholder="no. of Bedrooms" />
