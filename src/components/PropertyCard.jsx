@@ -30,6 +30,7 @@ export default function PropertyCard(props) {
           <h3 className="text-blue-900 font-bold text-lg">{price}</h3>
           <CiHeart className="text-2xl text-gray-500 hover:text-red-500 cursor-pointer" />
         </div>
+        <h5 className="text-sm font-semibold mb-1">{categoryName}</h5>
 
         <h4 className="text-sm font-semibold mb-1">{title}</h4>
 
@@ -40,14 +41,14 @@ export default function PropertyCard(props) {
 
         <p className="text-xs text-gray-600 mb-4 line-clamp-2">
           {description}
-        </p> 
+        </p>
 
         <div className="flex justify-between text-center text-blue-900 text-xs font-medium">
           <div className="flex flex-col items-center">
             <div className="flex items-center gap-1">
               <img src={BedroomImg} alt="Bedroom" className="h-4 w-4" /> {bedrooms}
             </div>
-           Bedrooms
+            Bedrooms
           </div>
 
           <div className="flex flex-col items-center">
