@@ -8,7 +8,7 @@ export default function PropertyCard(props) {
     slug,
     price,
     description,
-    categoryName,
+    category,
     location,
     bedrooms,
     bathrooms,
@@ -30,7 +30,7 @@ export default function PropertyCard(props) {
           <h3 className="text-blue-900 font-bold text-lg">{price}</h3>
           <CiHeart className="text-2xl text-gray-500 hover:text-red-500 cursor-pointer" />
         </div>
-        <h5 className="text-sm font-semibold mb-1">{categoryName}</h5>
+        <h5 className="text-sm font-semibold text-slate-500 mb-1">{category.name}</h5>
 
         <h4 className="text-sm font-semibold mb-1">{title}</h4>
 

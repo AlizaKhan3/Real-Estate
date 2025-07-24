@@ -2,13 +2,15 @@ import { useState } from "react"
 import Input from "../components/Input"
 import { axiosInstanceProperty } from "../config/axiosInstance"
 import FilterByPrice from "./FilterByPrice"
+import CategoryFilter from "./CategoryFilter"
 
-const PropertiesNavbar = ({ filterPriceHandle }) => {
+const PropertiesNavbar = ({ filterPriceHandle, handleCategory }) => {
        return (
         <div className="fixed top-14 w-full h-16 px-7 bg-blue-700 shadow-md flex gap-6 justify-start items-center">
             {/* <button className="text-white px-3 py-2 rounded-4xl border ">Filter by Price</button> */}
             <div className="flex gap-4 justify-center items-center">
                 <FilterByPrice handleSort={filterPriceHandle} />
+                <CategoryFilter handleCategory={handleCategory}/>
                 <div className="w-full max-w-xs">
                     <Input placeholder="Search by Location" />
                 </div>
