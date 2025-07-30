@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom"
 
 const Properties = () => {
   const [propertyList, setPropertyList] = useState([])
-  const [categoryList, setCategoryList] = useState([])
+  // const [categoryList, setCategoryList] = useState([])
 
-  const navigate  = useNavigate()
+  const navigate = useNavigate()
   useEffect(() => {
     axiosInstanceProperty.get("/").then((res) => {
       const response = res.data.data
@@ -54,48 +54,49 @@ const Properties = () => {
   }
 
 
-  const handleCategory = async (value) => {
+  const handleCategory = async (selectedCategory) => {
     try {
-      const response = await axiosInstanceProperty.get("/categories")
-      const resData = response.data.data 
+      // const response = await axiosInstanceProperty.get("/categories")
+      const response = await axiosInstanceProperty.get("/")  //getting properties
+      const resData = response.data.data
 
-      const category = categoryList.map(cat => cat.name);
-      console.log(category)
+      const filteredData = resData.filter(property => property.category.name);
+      console.log("property wali category->", filteredData)
 
-      let filteredData;
+      // let filteredData;
 
-      if (value === "") {
-        setPropertyList(propertyList);
-      }
+      // if (selectedCategory === "") {
+      //   setPropertyList(resData);
+      // }
 
-      if(value === "House"){
-        // filteredData = propertyList.filter((property)=> property.category.name === category)
-        console.log(filteredData)
-        setPropertyList(filteredData);
-      }
-      
-      // console.log(res)
-      console.log(resData)
-      console.log(value, "ye rahi cat val")
-      setCategoryList(resData)
-      // if()
-    } catch (error) {
-      console.log("Error in filtering category", error.message)
-    }
+      if (selectedCategory === "Apartment" && filteredData[category] === "Apartment") {
+        // const filteredData = propertyList.map(property => property.category.name === "Apartment");
+        // console.log(filteredData)
+        return setPropertyList(filteredData);
 
-  }
-  return (
-    <div className="w-full">
-      <PropertiesNavbar filterPriceHandle={handlePrice} handleCategory={handleCategory} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 pt-40">
-        {propertyList.map((object) => {
-          return <PropertyCard key={object.id} data={object} />
-        })
+
         }
+
+        console.log(selectedCategory, "ye rahi selected cat val")
+        // setCategoryList(resData)
+        // if()
+      } catch (error) {
+        console.log("Error in filtering category", error.message)
+      }
+
+    }
+  return (
+      <div className="w-full">
+        <PropertiesNavbar filterPriceHandle={handlePrice} handleCategory={handleCategory} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 pt-40">
+          {propertyList.map((object) => {
+            return <PropertyCard key={object.id} data={object} />
+          })
+          }
+        </div>
       </div>
-    </div>
 
-  )
-}
+    )
+  }
 
-export default Properties
+  export default Properties
