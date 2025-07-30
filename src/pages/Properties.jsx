@@ -3,12 +3,13 @@ import PropertiesNavbar from "../components/propertiesNavbar"
 import PropertyCard from "../components/PropertyCard"
 import { axiosInstanceProperty } from "../config/axiosInstance.js"
 import { useNavigate } from "react-router-dom"
+import Error from "../pages/Error.jsx"
 
 const Properties = () => {
   const [propertyList, setPropertyList] = useState([])
   // const [categoryList, setCategoryList] = useState([])
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   useEffect(() => {
     axiosInstanceProperty.get("/").then((res) => {
       const response = res.data.data
@@ -60,34 +61,32 @@ const Properties = () => {
       const response = await axiosInstanceProperty.get("/")  //getting properties
       const resData = response.data.data
 
-      const filteredData = resData.filter(property => property.category.name);
-      console.log("property wali category->", filteredData)
+      const filteredData = resData.filter(property => property.category.name === selectedCategory );
+      // console.log("property wali category->", filteredData)
 
       // let filteredData;
 
-      // if (selectedCategory === "") {
-      //   setPropertyList(resData);
-      // }
+      if (filteredData) {
+        setPropertyList(filteredData);
+      } 
+      
+       if (!filteredData) {
+        return "pROPETY not found ka ek component rkhna hei kese krun"
+      } 
 
-      if (selectedCategory === "Apartment" && filteredData[category] === "Apartment") {
-        // const filteredData = propertyList.map(property => property.category.name === "Apartment");
-        // console.log(filteredData)
-        return setPropertyList(filteredData);
-
-
-        }
-
-        console.log(selectedCategory, "ye rahi selected cat val")
-        // setCategoryList(resData)
-        // if()
+     
       } catch (error) {
         console.log("Error in filtering category", error.message)
       }
 
     }
+
+    const handleBedrooms = async (selectedBedroom) => {
+      console.log(selectedBedroom)
+    }
   return (
       <div className="w-full">
-        <PropertiesNavbar filterPriceHandle={handlePrice} handleCategory={handleCategory} />
+        <PropertiesNavbar filterPriceHandle={handlePrice} handleCategory={handleCategory} handleBedrooms={handleBedrooms}/>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 pt-40">
           {propertyList.map((object) => {
             return <PropertyCard key={object.id} data={object} />
