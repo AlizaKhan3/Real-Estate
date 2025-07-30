@@ -1,5 +1,3 @@
-import { categoryList } from "../../../ecommerce-web/src/utils/data"
-
 const CategoryFilter = ({ handleCategory }) => {
     const Category = [
         {
