@@ -7,7 +7,7 @@ import Error from "../pages/Error.jsx"
 
 const Properties = () => {
   const [propertyList, setPropertyList] = useState([])
-  // const [categoryList, setCategoryList] = useState([])
+  const [allProperties, setAllProperties] = useState([]) // backup to reset
 
   // const navigate = useNavigate()
   useEffect(() => {
@@ -15,6 +15,7 @@ const Properties = () => {
       const response = res.data.data
       console.log(response)
       setPropertyList(response)
+      setAllProperties(response)
     })
       .catch((err) => {
         console.log(err)
@@ -61,41 +62,54 @@ const Properties = () => {
       const response = await axiosInstanceProperty.get("/")  //getting properties
       const resData = response.data.data
 
-      const filteredData = resData.filter(property => property.category.name === selectedCategory );
+      const filteredData = resData.filter(property => property.category.name === selectedCategory);
       // console.log("property wali category->", filteredData)
 
       // let filteredData;
 
       if (filteredData) {
         setPropertyList(filteredData);
-      } 
-      
-       if (!filteredData) {
-        return "pROPETY not found ka ek component rkhna hei kese krun"
-      } 
-
-     
-      } catch (error) {
-        console.log("Error in filtering category", error.message)
       }
 
+      if (!filteredData) {
+        return "pROPETY not found ka ek component rkhna hei kese krun"
+      }
+
+
+    } catch (error) {
+      console.log("Error in filtering category", error.message)
     }
 
-    const handleBedrooms = async (selectedBedroom) => {
-      console.log(selectedBedroom)
-    }
-  return (
-      <div className="w-full">
-        <PropertiesNavbar filterPriceHandle={handlePrice} handleCategory={handleCategory} handleBedrooms={handleBedrooms}/>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 pt-40">
-          {propertyList.map((object) => {
-            return <PropertyCard key={object.id} data={object} />
-          })
-          }
-        </div>
-      </div>
-
-    )
   }
 
-  export default Properties
+  const handleBedrooms = async (selectedBedroom) => {
+    console.log(selectedBedroom)
+  }
+
+
+  const searchHandle = (searchedLocation) => {
+    if (!searchedLocation) {
+      setPropertyList(allProperties) // reset to original if empty
+    } else {
+      const FilteredData = allProperties.filter((property) =>
+        property.location.toLowerCase().includes(searchedLocation.toLowerCase())
+      )
+      setPropertyList(FilteredData)
+    }
+  }
+
+  return (
+    <div className="w-full">
+      <PropertiesNavbar locationSearchHandle={searchHandle} filterPriceHandle={handlePrice} handleCategory={handleCategory} handleBedrooms={handleBedrooms} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 pt-40">
+        {propertyList.map((object) => {
+          return <PropertyCard key={object.id} data={object} />
+        })
+        }
+      </div>
+    </div>
+
+  )
+}
+
+export default Properties
