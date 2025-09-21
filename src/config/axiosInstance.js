@@ -1,7 +1,9 @@
 import axios from "axios"
 
-const BaseURL = "http://localhost:8000/auth"
-const BaseURLProducts = "http://localhost:8000/properties"
+const BaseURL = "https://realestate-properties-backend.onrender.com/auth"
+const BaseURLProducts = "https://realestate-properties-backend.onrender.com/properties"
+// https://realestate-properties-backend.onrender.com
+// http://localhost:8000/
 
 export const axiosInstance = axios.create({
     baseURL: BaseURL
