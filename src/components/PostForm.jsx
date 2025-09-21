@@ -54,15 +54,15 @@ const PostForm = ({ sendDataToDashboard }) => {
                 <div className="flex justify-center items-center">
                     <Input required onChange={(e) => setImages({ ...images, image1: e.target.files[0] })} type="file" name="image1" />
 
-                    <Input onChange={(e) => setImages({ ...images, image1: e.target.files[0] })}
+                    <Input onChange={(e) => setImages({ ...images, image2: e.target.files[0] })}
                         type="file"
                         name="image2" />
-                    <Input required onChange={(e) => setImages({ ...images, image1: e.target.files[0] })} type="file" name="image3" />
+                    <Input required onChange={(e) => setImages({ ...images, image3: e.target.files[0] })} type="file" name="image3" />
                 </div>
                 <div className="flex justify-center items-center">
                     <Input required onChange={(e) => handleInput("bedrooms", e.target.value)} type="number" placeholder="no. of Bedrooms" />
                     <Input required onChange={(e) => handleInput("bathrooms", e.target.value)} type="number" placeholder="no. of Bathrooms" />
-                    <Input required onChange={(e) => handleInput("Area Square feet", e.target.value)} type="number" placeholder="Sqaure Ft." />
+                    <Input required onChange={(e) => handleInput("areaSqft", e.target.value)} type="number" placeholder="Sqaure Ft." />
                 </div>
                 <select
                     value={formData.status || ""}
@@ -74,7 +74,7 @@ const PostForm = ({ sendDataToDashboard }) => {
                     <option value="sold">Sold</option>
                     <option value="rent">Rent</option>
                 </select>
-                <button type="Update"> Submit </button>
+                <button type="submit"> Submit </button>
             </form>
         </div>
     )

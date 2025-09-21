@@ -2,6 +2,8 @@ import { CiHeart, CiLocationOn } from "react-icons/ci";
 import LivingRoomImg from "../assets/Livingarea.png";
 import BedroomImg from "../assets/Bedrooms.png";
 import BathroomImg from "../assets/BathroomIcon.png";
+const API_URL = "http://localhost:8000";
+
 
 export default function PropertyCard(props) {
   const { title,
@@ -19,7 +21,9 @@ export default function PropertyCard(props) {
     <div className="flex flex-col md:flex-row bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition m-2 p-4">
       <div className="w-full md:w-1/3">
         <img
-          src={images[0]}
+          // src={images[0]}
+          src={`${API_URL}${images[0]}`}
+
           alt="Property"
           className="w-full h-full object-cover"
         />
