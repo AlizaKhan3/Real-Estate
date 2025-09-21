@@ -26,6 +26,17 @@ export const ProtectedRoutesSell = () => {
 
     return (
         data ? <Outlet /> : <Navigate to="/register" />
+    )
+}
 
+
+
+export const PublicRoutes = () => {
+    //data jwt mein store hei toh usey get karo -- dashboard check
+    const userToken = localStorage.getItem("token")
+    
+
+    return (
+        userToken ? <Navigate to="/properties"/> : <Outlet />
     )
 }

@@ -5,7 +5,7 @@ import Register from "../pages/Register"
 import Properties from "../pages/Properties"
 import Selling from "../pages/Selling"
 import Dashboard from "../pages/Dashboard"
-import { ProtectedRoutesDashboard, ProtectedRoutesSell } from "../pages/ProtectedRoutes"
+import { ProtectedRoutesDashboard, ProtectedRoutesSell, PublicRoutes } from "../pages/ProtectedRoutes"
 import Navbar from "../components/Navbar"
 // import Sidebar from "../components/Sidebar"
 import Error from "../pages/Error"
@@ -18,11 +18,15 @@ const Router = () => {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                {/* <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} /> */}
                 <Route path="/properties" element={<Properties />} />
                 <Route path="*" element={<Error />} />
 
+                <Route element={<PublicRoutes />}>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                </Route>
                 {/* //nested route */}
                 {/* <Route path="/purchase/*" element={<Sidebar />} /> */}
 

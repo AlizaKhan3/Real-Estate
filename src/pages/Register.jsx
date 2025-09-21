@@ -10,28 +10,26 @@ export default function Register() {
         handleSubmit,
         formState: { errors },
     } = useForm();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
-        // console.log("Form Data:", data);
-
         try {
             const response = await axiosInstance.post('/register', data);
             console.log("post data:", data);
 
             // ✅ Get token from response
-            // const token = response.data.token;
-            // localStorage.setItem("token", token);
+            const token = response.data.token;
+            localStorage.setItem("token", token);
 
-            // //decoding this token is mein role hoga.
-            // const decodedToken = jwtDecode(token);
-            // console.log(decodedToken)
+            //decoding this token is mein role hoga.
+            const decodedToken = jwtDecode(token);
+            console.log(decodedToken)
 
-            // if (decodedToken.role === "admin") {
-            //     navigate("/dashboard")
-            // } else {
-            //     navigate("/properties");
-            // }
+            if (decodedToken.role === "admin") {
+                navigate("/dashboard")
+            } else {
+                navigate("/properties");
+            }
 
         } catch (error) {
             console.log(error)
